@@ -1,4 +1,4 @@
-const cpfs = document.querySelectorAll('.cpf li');
+const cpfsList = document.querySelectorAll('.cpf li');
 
 function elementsInnerText([...elements]) {
   return elements.map((element) => element.innerText);
@@ -13,5 +13,16 @@ function construirCPF(cpf) {
 }
 
 function formatarCPFS(cpfs) {
-  return cpfs.map(limparCPF);
+  return cpfs.map(limparCPF).map(construirCPF);
 }
+
+const substituiCPFS = (cpfsElements) => {
+  const cpfs = elementsInnerText(cpfsElements);
+  const cpfsFormatados = formatarCPFS(cpfs);
+
+  cpfsElements.forEach((element, index) => {
+    element.innerText = cpfsFormatados[index];
+  });
+};
+
+substituiCPFS(cpfsList);
